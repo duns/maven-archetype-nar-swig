@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <packaging>nar</packaging>
+  <version>${version}</version>
+  
+  <name>Maven NAR SWIG Project</name>
+
+  <properties>
+    <maven.test.skip.exec>true</maven.test.skip.exec>
+  </properties>
+
+  <build>
+    <defaultGoal>integration-test</defaultGoal>
+    <plugins>
+      <plugin>
+        <artifactId>maven-swig-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <packageName>${groupId}</packageName>
+              <source>App.swg</source>
+              <outFile>AppJNI.c</outFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>  
+      <plugin>
+        <artifactId>maven-nar-plugin</artifactId>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
